@@ -34,13 +34,15 @@ location = "l"
 email = "e"
 id = "i"
 
-conn.execute("""CREATE TABLE IF NOT EXISTS user (
-    name TEXT,
-    password TEXT,
-    type TEXT,
-    location TEXT,
-    email TEXT,
-    )""")
+with conn:
+
+    conn.execute("""CREATE TABLE IF NOT EXISTS user (
+        name TEXT,
+        password TEXT,
+        type TEXT,
+        location TEXT,
+        email TEXT
+        )""")
 
 
 def makeUser(name,password,type,location,email):
