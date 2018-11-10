@@ -3,7 +3,10 @@ import '../style.css'
 
 class Button extends Component {
   render() {
-    return <button>I Need Something</button>
+    return <div>
+      <button>I Need Something</button>
+      <button>I Have Something</button>
+    </div>
   }
 }
 
