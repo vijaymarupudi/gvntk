@@ -5,7 +5,7 @@ import About from './About'
 
 function Index () {
   return <div>
-    <Route path="/" component={Home} />
+    <Route path="/" exact component={Home} />
     <Route path="/about" component={About} />
   </div>
 }
