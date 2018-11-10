@@ -16,3 +16,6 @@ with conn:
     conn.execute('INSERT INTO user (name, type, location, email, id) VALUES ("Hamza", "giver", "madison, Wi", "hamza.ehsan@lawrence.edu", 1 )')
 
 conn.close()
+
+
+    
