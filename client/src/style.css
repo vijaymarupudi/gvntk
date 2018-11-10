@@ -11,7 +11,7 @@ body {
   min-height: 100vh;
 }
 
-button {
+.mainbuttons {
   background-color: #2a3060;
   color: #f1f2f8;
   font-size: 150%;
@@ -25,4 +25,13 @@ button {
 button:hover {
   background-color: #547882;
   color: white;
+}
+.aboutusbutton {
+  padding: 20px 35px;
+  width: 50%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 120%;
+  border-radius: 12px;
+  color: #f1f2f8;
+  background-color: #92a0a4;
 }
