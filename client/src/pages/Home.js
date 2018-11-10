@@ -1,16 +1,27 @@
 import React, { Component } from "react";
 import "../style.css";
 
-class Button extends Component {
+class GiveOrTakeButtons extends Component {
   render() {
     return (
       <div>
         <Centered>
-          <button>I Need Something</button>
-          <button>I Have Something</button>
+          <button class="mainbuttons">I Need Something</button>
+          <button class="mainbuttons">I Have Something</button>
         </Centered>
       </div>
     );
+  }
+}
+class AboutUsButton extends Component {
+  render () {
+    return (
+      <div class="section" style={{
+        marginTop: "100px"
+      }}>
+        <button class="aboutusbutton">Our Mission</button>
+      </div>
+    )
   }
 }
 
@@ -29,7 +40,8 @@ class App extends Component {
     return (
       <div className="App section container">
         <h1 class="title is-1">giveNtake</h1>
-        <Button />
+        <GiveOrTakeButtons />
+        <AboutUsButton />
       </div>
     );
   }
