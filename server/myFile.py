@@ -21,7 +21,7 @@ with conn:
 # photo is a picture of the item
 # explaination of item
 # timecreated is when the item was created
-# type item is either a give or take
+# typeitem is either a give or take
 # owner is the user email who posted the item
 
 name = "Burei Watch"
@@ -64,5 +64,6 @@ def makeUser(name,password,type,location,email):
 makeUser(name,password,type,location,email)
 itemCreation(name,type,subtype,date,description,timeCreated,email)
 conn.close()
+
 
 
