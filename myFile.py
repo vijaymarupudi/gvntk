@@ -7,7 +7,11 @@ with conn:
         name TEXT,
         type TEXT,
         subtype TEXT,
-        date TEXT
+        date TEXT,
+        photo BLOB,
+        description TEXT,
+        timeCreated TEXT,
+        id INT
     )""")
     conn.execute('INSERT INTO item (name, type, subtype, date) VALUES ("Vijay", "Clothes",  "Coat", "Today")')
 
