@@ -9,20 +9,30 @@ with conn:
         subtype TEXT,
         date TEXT
     )""")
+    conn.execute('INSERT INTO item (name, type, subtype, date) VALUES ("Vijay", "Clothes",  "Coat", "Today")')
 
+name = "n"
+password "p"
+type = "t"
+location= "l"
+email ="e"
+id = "i"
+
+def makeUser(name,password,type,location,email,id):
+    
+    with conn:
     conn.execute("""CREATE TABLE IF NOT EXISTS user (
         name TEXT,
+        password TEXT,
         type TEXT,
         location TEXT,
         email TEXT,
         id INT
         )""")
     
-    conn.execute('INSERT INTO user (name, type, location, email, id) VALUES ("Hamza", "giver", "madison, Wi", "hamza.ehsan@lawrence.edu", 1 )')
+    conn.execute('INSERT INTO user (name, password, type, location, email, id) VALUES (?,?,?,?,?,?)',(name,password,type,location,email,id))
 
-        conn.execute('INSERT INTO item (name, type, subtype, date) VALUES ("Vijay", "Clothes",  "Coat", "Today")')
-
-conn.close()
+    conn.close()
 
 
     
