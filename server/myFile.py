@@ -7,7 +7,6 @@ with conn:
         name TEXT,
         type TEXT,
         subtype TEXT,
-        date TEXT,
         photo BLOB,
         description TEXT,
         timeCreated TEXT,
@@ -15,6 +14,15 @@ with conn:
         ownerEmail TEXT,
         id INT
     )""")
+
+# name item name
+# type of item i.e clothes
+# subtype is subtype of item i.e coat
+# photo is a picture of the item
+# explaination of item
+# timecreated is when the item was created
+# type item is either a give or take
+# owner is the user email who posted the item
 
 name = "Burei Watch"
 type = "accesories"
@@ -44,6 +52,18 @@ with conn:
         email TEXT
         )""")
 
+conn.execute("""CREATE TABLE IF NOT EXISTS user (
+    name TEXT,
+    password TEXT,
+    type TEXT,
+    location TEXT,
+    email TEXT,
+    )""")
+# name is name
+# password is password
+# type is either giver or taker
+# location is a string with the location they entered
+# email is the user email
 
 def makeUser(name,password,type,location,email):
     
@@ -54,4 +74,5 @@ def makeUser(name,password,type,location,email):
 makeUser(name,password,type,location,email)
 itemCreation(name,type,subtype,date,description,timeCreated,email)
 conn.close()
+
 
