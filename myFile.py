@@ -22,7 +22,7 @@ location= "l"
 email ="e"
 id = "i"
 
-def makeUser(name,password,type,location,email,id):
+def makeUser(name,password,type,location,email):
     
     with conn:
     conn.execute("""CREATE TABLE IF NOT EXISTS user (
@@ -31,10 +31,9 @@ def makeUser(name,password,type,location,email,id):
         type TEXT,
         location TEXT,
         email TEXT,
-        id INT
         )""")
     
-    conn.execute('INSERT INTO user (name, password, type, location, email, id) VALUES (?,?,?,?,?,?)',(name,password,type,location,email,id))
+    conn.execute('INSERT INTO user (name, password, type, location, email) VALUES (?,?,?,?,?)',(name,password,type,location,email))
 
     conn.close()
 
