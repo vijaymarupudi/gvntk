@@ -42,6 +42,16 @@ location = "l"
 email = "e"
 id = "i"
 
+with conn:
+
+    conn.execute("""CREATE TABLE IF NOT EXISTS user (
+        name TEXT,
+        password TEXT,
+        type TEXT,
+        location TEXT,
+        email TEXT
+        )""")
+
 conn.execute("""CREATE TABLE IF NOT EXISTS user (
     name TEXT,
     password TEXT,
