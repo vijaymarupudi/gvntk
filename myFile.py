@@ -11,6 +11,8 @@ with conn:
         photo BLOB,
         description TEXT,
         timeCreated TEXT,
+        typeItem TEXT,
+        ownerEmail TEXT,
         id INT
     )""")
 name = "Burei Watch"
@@ -19,19 +21,36 @@ subtype = "wrists"
 date = "today"
 description = "a black watch with mesh steel band"
 timeCreated = "now"
-def itemCreation(name,type,subtype,date,description,timeCreated):
-    conn.execute('INSERT INTO item (name, type, subtype, date, description,timeCreated) VALUES (?,?,?,?,?,?)', (name,type,subtype,date,description,timeCreated))
+def itemCreation(name,type,subtype,date,description,timeCreated,email):
+    conn.execute('INSERT INTO item (name, type, subtype, date, description,timeCreated, ownerEmail) VALUES (?,?,?,?,?,?,?)', (name,type,subtype,date,description,timeCreated,email))
 
-itemCreation(name,type,subtype,date,description,timeCreated)
 with conn:
-    conn.execute("""CREATE TABLE IF NOT EXISTS user (
-        name TEXT,
-        type TEXT,
-        location TEXT,
-        email TEXT,
-        id INT
-        )""")
+    conn.execute('INSERT INTO item (name, type, subtype, date) VALUES ("Vijay", "Clothes",  "Coat", "Today")')
+
+name = "n"
+password = "p"
+type = "t"
+location = "l"
+email = "e"
+id = "i"
+
+def makeUser(name,password,type,location,email,id):
+    
+    with conn:
+        conn.execute("""CREATE TABLE IF NOT EXISTS user (
+            name TEXT,
+            password TEXT,
+            type TEXT,
+            location TEXT,
+            email TEXT,
+            id INT
+            )""")
 
     
     conn.execute('INSERT INTO user (name, type, location, email, id) VALUES ("Hamza", "giver", "madison, Wi", "hamza.ehsan@lawrence.edu", 1 )')
     conn.execute('INSERT INTO item (name, type, subtype, date) VALUES ("Fila Coat", "Clothes",  "Coat", "Today")')
+    conn.execute('INSERT INTO user (name, password, type, location, email, id) VALUES (?,?,?,?,?,?)',(name,password,type,location,email,id))
+
+itemCreation(name,type,subtype,date,description,timeCreated,email)
+conn.close()
+
