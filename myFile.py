@@ -15,17 +15,17 @@ with conn:
         ownerEmail TEXT,
         id INT
     )""")
+
 name = "Burei Watch"
 type = "accesories"
 subtype = "wrists"
 date = "today"
 description = "a black watch with mesh steel band"
 timeCreated = "now"
-def itemCreation(name,type,subtype,date,description,timeCreated,email):
-    conn.execute('INSERT INTO item (name, type, subtype, date, description,timeCreated, ownerEmail) VALUES (?,?,?,?,?,?,?)', (name,type,subtype,date,description,timeCreated,email))
 
-with conn:
-    conn.execute('INSERT INTO item (name, type, subtype, date) VALUES ("Vijay", "Clothes",  "Coat", "Today")')
+def itemCreation(name,type,subtype,date,description,timeCreated,email):
+    with conn:
+        conn.execute('INSERT INTO item (name, type, subtype, date, description,timeCreated, ownerEmail) VALUES (?,?,?,?,?,?,?)', (name,type,subtype,date,description,timeCreated,email))
 
 name = "n"
 password = "p"
@@ -34,32 +34,22 @@ location = "l"
 email = "e"
 id = "i"
 
+conn.execute("""CREATE TABLE IF NOT EXISTS user (
+    name TEXT,
+    password TEXT,
+    type TEXT,
+    location TEXT,
+    email TEXT,
+    )""")
+
+
 def makeUser(name,password,type,location,email):
     
     with conn:
-        conn.execute("""CREATE TABLE IF NOT EXISTS user (
-            name TEXT,
-            password TEXT,
-            type TEXT,
-            location TEXT,
-            email TEXT,
-            id INT
-            )""")
 
-    
-    conn.execute('INSERT INTO user (name, type, location, email, id) VALUES ("Hamza", "giver", "madison, Wi", "hamza.ehsan@lawrence.edu", 1 )')
-    conn.execute('INSERT INTO item (name, type, subtype, date) VALUES ("Fila Coat", "Clothes",  "Coat", "Today")')
-    conn.execute('INSERT INTO user (name, password, type, location, email, id) VALUES (?,?,?,?,?,?)',(name,password,type,location,email,id))
-    conn.execute("""CREATE TABLE IF NOT EXISTS user (
-        name TEXT,
-        password TEXT,
-        type TEXT,
-        location TEXT,
-        email TEXT,
-        )""")
-    
-    conn.execute('INSERT INTO user (name, password, type, location, email) VALUES (?,?,?,?,?)',(name,password,type,location,email))
+        conn.execute('INSERT INTO user (name, password, type, location, email) VALUES (?,?,?,?,?)',(name,password,type,location,email))
 
+makeUser(name,password,type,location,email)
 itemCreation(name,type,subtype,date,description,timeCreated,email)
 conn.close()
 
