@@ -1,6 +1,5 @@
 import sqlite3
 
-<<<<<<< HEAD
 conn = sqlite3.connect('./userDatabase.db')
 
 with conn:
