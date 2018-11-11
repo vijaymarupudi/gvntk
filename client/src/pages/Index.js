@@ -5,6 +5,7 @@ import About from "./About";
 import NewUser from "./NewUser";
 import NewItem from "./NewItem";
 import LoginPage from "../pages/LoginPage";
+import List from "../pages/List";
 
 function Index() {
   return (
@@ -14,6 +15,7 @@ function Index() {
       <Route path="/new_user" component={NewUser} />
       <Route path="/new_item" component={NewItem} />
       <Route path="/login" component={LoginPage} />
+      <Route path="/list" component={List} />
     </div>
   );
 }
