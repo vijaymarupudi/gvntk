@@ -33,11 +33,14 @@ class Card extends Component {
           <div> </div>
         </div>
         <footer className="card-footer">
-          <div className="card-footer-item">{typeItem === "GIVEN" ? "I want this" : "Taken"}</div>
+          <button onClick={reload} className="card-footer-item">{typeItem === "GIVEN" ? "I want this" : "Taken"}</button>
         </footer>
       </div>
     );
   }
+}
+function reload() {
+  window.location.reload()
 }
 
 class List extends Component {
@@ -69,5 +72,9 @@ class List extends Component {
     );
   }
 }
+//handleSubmit(e) {
+  //e.preventDefault();
+  //const formData = utils.formToObject(e.target);
+  //utils.postData("/login", formData)
 
 export default List;
