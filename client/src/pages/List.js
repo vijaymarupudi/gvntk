@@ -12,29 +12,31 @@ class Card extends Component {
       typeItem
     } = this.props;
     return (
-      <div class="card">
-        <div class="card-image" >
-          <figure class="image is-4by3">
-          {/* <img src={bicycleImage} alt="Placeholder" /> */}
+      <div className="card">
+        <div className="card-image">
+          <figure className="image is-4by3">
+            {/* <img src={bicycleImage} alt="Placeholder" /> */}
           </figure>
         </div>
-      <div class="card-content">
-        <div class="media">
-              <div class="media-left" >
-               <p class="title is-4">{name}</p>
-               <p class="subtitle is-6">{ownerEmail}</p>
-              </div>
+        <div className="card-content">
+          <div className="media">
+            <div className="media-left">
+              <p className="title is-4">{name}</p>
+              <p className="subtitle is-6">{ownerEmail}</p>
+            </div>
+          </div>
+          <div className="content">
+            {description}, {mainCategory}
+            <br />
+            <time dateTime={timeCreated}>{timeCreated}</time>
+          </div>
+          <div> </div>
         </div>
-     <div class="content"> {description}, {mainCategory}
-     <br />
-       <time datetime="2016-1-1">{timeCreated}</time>
-       </div>
-       <div> <footer class="card-footer">
-          <div>{typeItem}</div>
-  </footer></div>
-    </div>
-  </div>
-    )
+        <footer className="card-footer">
+          <div className="card-footer-item">{typeItem === "GIVEN" ? "I want this" : "Taken"}</div>
+        </footer>
+      </div>
+    );
   }
 }
 
@@ -59,8 +61,8 @@ class List extends Component {
         <div className="container section">
           {this.state.data &&
             this.state.data.map(item => {
-              console.log(item)
-              return <Card {...item} />;
+              console.log(item);
+              return <Card key={item.name} {...item} />;
             })}
         </div>
       </Layout>
