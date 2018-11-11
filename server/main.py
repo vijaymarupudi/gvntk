@@ -48,6 +48,12 @@ def hello():
     )
     return jsonify("success")
 
+@app.route("/ something somthin", methods=["POST"])
+def itemTaken():
+    data = get_post_data
+    print(data)
+    database_tools.itemTaken(data["name"], data["typeItem"])
+    return jsonify("success")
 
 @app.route("/new_item", methods=["POST"])
 def itemCreation():

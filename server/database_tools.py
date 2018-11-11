@@ -88,7 +88,7 @@ def emailPassword(email, userPassword):
         except:
             return False
 
-def takenUpdate(typeItem):
+def takenUpdate(name, typeItem):
     with get_conn():
-        get_conn().execute('UPDATE item SET typeItem = data[typeItem] WHERE condition;')
+        get_conn().execute('UPDATE item SET typeItem = data[typeItem] WHERE name=(?)',(name,))
 
