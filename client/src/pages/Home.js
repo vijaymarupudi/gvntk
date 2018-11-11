@@ -14,23 +14,34 @@ class GiveOrTakeButtons extends Component {
   }
 }
 class AboutUsButton extends Component {
-  render () {
+  render() {
     return (
-      <div class="section" style={{
-        marginTop: "100px"
-      }}>
+      <div
+        class="section"
+        style={{
+          marginTop: "100px"
+        }}
+      >
         <button class="aboutusbutton">Our Mission</button>
       </div>
-    )
+    );
   }
 }
 
 function Centered(props) {
+  if (Array.isArray(props.children)) {
+    return (
+      <div className="level">
+        {props.children.map(item => (
+          <div className="level-item">{item}</div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="level">
-      {props.children.map(item => (
-        <div className="level-item">{item}</div>
-      ))}
+      <div className="level-item">{props.children}</div>
     </div>
   );
 }
