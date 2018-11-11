@@ -1,67 +1,34 @@
 import sqlite3
+from flask import g
+from app import app
 
-conn = sqlite3.connect("./userDatabase.db")
+DATABASE = './userDatabase.db'
 
-with conn:
-    conn.execute(
-        """CREATE TABLE IF NOT EXISTS item (
-        name TEXT,
-        mainCatagory TEXT,
-        subCatagory TEXT,
-        photo BLOB,
-        description TEXT,
-        timeCreated TEXT,
-        typeItem TEXT,
-        ownerEmail TEXT,
-        id INT
-    )"""
-    )
+# It connects the database if it's not connected.
+def get_conn():
+    conn = getattr(g, '_database', None)
+    if conn is None:
+        conn = g._database = sqlite3.connect(DATABASE)
+    return conn
 
-# name item name
-# type of item i.e clothes
-# subtype is subtype of item i.e coat
-# photo is a picture of the item
-# explaination of item
-# timecreated is when the item was created
-# typeitem is either a give or take
-# owner is the user email who posted the item
-
-
-with conn:
-    conn.execute(
-        """CREATE TABLE IF NOT EXISTS user (
-        userName TEXT,
-        password TEXT,
-        accountType TEXT,
-        location TEXT,
-        email TEXT
-        )"""
-    )
-
-with conn:
-    # feedback contains feed back from the user
-    # timecreated is the time of the feedback posting
-    # creates the feedback schema
-
-    conn.execute(
-        """CREATE TABLE IF NOT EXISTS feedback (
-            feedback TEXT,
-            timeCreated TEXT,
-            feedBackName TEXT
-            )"""
-    )
+# It disconnects automatically
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
 
 
 def itemCreation(
-    name, mainCatagory, subCatagory, date, description, timeCreated, email, typeItem
+    name, mainCategory, subCategory, date, description, timeCreated, email, typeItem
 ):
-    with conn:
-        conn.execute(
-            "INSERT INTO item (name, mainCatagory, subCatagory, date, description,timeCreated, ownerEmail, typeItem) VALUES (?,?,?,?,?,?,?)",
+    with get_conn():
+        get_conn().execute(
+            "INSERT INTO item (name, mainCategory, subCategory, date, description,timeCreated, ownerEmail, typeItem) VALUES (?,?,?,?,?,?,?)",
             (
                 name,
-                mainCatagory,
-                subCatagory,
+                mainCategory,
+                subCategory,
                 date,
                 description,
                 timeCreated,
@@ -73,38 +40,44 @@ def itemCreation(
 
 def makeUser(userName, password, accountType, location, email):
 
-    with conn:
+    with get_conn():
 
-        conn.execute(
+        get_conn().execute(
             "INSERT INTO user (userName, password, accountType, location, email) VALUES (?,?,?,?,?)",
             (userName, password, accountType, location, email),
         )
-        conn.commit()
+        get_conn().commit()
 
 
-def makeFeedback(feedback,timeCreated,feedBackName):
-    
-    with conn:
-        
-        conn.execute('INSERT INTO user (feedback,timeCreated,feedBackName) VALUES (?,?,?)',(feedback,timeCreated,feedBackName))
+def makeFeedback(feedback, timeCreated, feedBackName):
+
+    with get_conn():
+
+        get_conn().execute(
+            "INSERT INTO user (feedback,timeCreated,feedBackName) VALUES (?,?,?)",
+            (feedback, timeCreated, feedBackName),
+        )
 
 
-
-def returnItems(mainCatagory, typeItem):
-    with conn:
-        listOfItems = conn.execute(
-            "SELECT * FROM item where (mainCatagory,typeItem) = (?,?)", (mainCatagory, typeItem)
+def returnItems(mainCategory, typeItem):
+    with get_conn():
+        listOfItems = get_conn().execute(
+            "SELECT * FROM item where (mainCategory,typeItem) = (?,?)",
+            (mainCategory, typeItem),
         )
 
     return listOfItems
 
-def emailPassword(email,password):
-    with conn:
-        userPassword = conn.execute('SELECT password FROM user WHERE email = ?', (email))
+
+def emailPassword(email, password):
+    with get_conn():
+        userPassword = get_conn().execute(
+            "SELECT password FROM user WHERE email = ?", (email,)
+        ).fetchall()
+        print(userPassword)
         if userPassword == None:
             return False
         if userPassword == password:
             return True
         else:
             return False
-
