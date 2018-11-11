@@ -1,6 +1,8 @@
-from flask import Flask, redirect
+from flask import Flask, redirect, request
 app = Flask(__name__)
 
+def get_post_data():
+    return request.get_json(force=True)
 
 @app.after_request
 def add_header(response):
@@ -14,7 +16,8 @@ def index():
 
 @app.route('/new_user', methods=["POST"])
 def hello():
-    print('GOT POST')
-    return "Test"
+    data = get_post_data()
+    print('name', data['email'])
+    return 'sdfsd'
 
 app.run()
