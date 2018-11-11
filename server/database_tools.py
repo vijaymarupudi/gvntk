@@ -1,4 +1,5 @@
 import sqlite3
+import app.py
 
 conn = sqlite3.connect('./userDatabase.db')
 
@@ -36,21 +37,18 @@ def itemCreation(name,mainCatagory,subCatagory,date,description,timeCreated,emai
     with conn:
         conn.execute('INSERT INTO item (name, mainCatagory, subCatagory, date, description,timeCreated, ownerEmail, typeItem) VALUES (?,?,?,?,?,?,?)', (name,mainCatagory,subCatagory,date,description,timeCreated,email, typeItem))
 
-userName = "n"
-password = "p"
-location = "l"
-email = "e"
-id = "i"
+
 
 with conn:
 
     conn.execute("""CREATE TABLE IF NOT EXISTS user (
         userName TEXT,
         password TEXT,
-        type TEXT,
+        accountType TEXT,
         location TEXT,
         email TEXT
         )""")
+
 
 
 # name is name
@@ -59,14 +57,12 @@ with conn:
 # location is a string with the location they entered
 # email is the user email
 
-def makeUser(name,password,type,location,email):
+def makeUser(userName,password,accountType,location,email):
     
     with conn:
 
-        conn.execute('INSERT INTO user (name, password, type, location, email) VALUES (?,?,?,?,?)',(name,password,type,location,email))
+        conn.execute('INSERT INTO user (userName, password, accountType, location, email) VALUES (?,?,?,?,?)',(userName,password,accountType,location,email))
 
-makeUser(userName,password,type,location,email)
-itemCreation(userName,mainCataogry,subCatagory,date,description,timeCreated,email,typeItem)
 conn.close()
 
 
