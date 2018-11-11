@@ -11,7 +11,29 @@ class Card extends Component {
       timeCreated,
       typeItem
     } = this.props;
-    return <div>{timeCreated}</div>;
+    return (
+      <div class="card">
+        <div class="card-image" >
+          <figure class="image is-4by3">
+          {/* <img src={bicycleImage} alt="Placeholder" /> */}
+          </figure>
+        </div>
+      <div class="card-content">
+        <div class="media">
+              <div class="media-left" >
+               <p class="title is-4">{name}</p>
+               <p class="subtitle is-6">{ownerEmail}</p>
+              </div>
+        </div>
+     <div class="content"> {description}, {mainCategory}
+       <time datetime="2016-1-1">{timeCreated}</time>
+       </div>
+       <div> <footer class="card-footer">
+          <div>{typeItem}</div>
+  </footer></div>
+    </div>
+  </div>
+    )
   }
 }
 
