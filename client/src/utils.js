@@ -2,7 +2,9 @@ export function postData(url, data) {
   return fetch(`http://127.0.0.1:5000${url}`, {
   method: "POST",
   body: JSON.stringify(data)
-});
+  }).then(resp => resp.json()).then(data => {
+      console.log(data)
+  });
 }
 
 export function formToObject ($form) {

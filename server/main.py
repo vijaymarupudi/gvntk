@@ -1,7 +1,28 @@
-from flask import redirect, request, jsonify
+from flask import redirect, request, jsonify, session
+import os
 from app import app
 import database_tools
 
+
+global_state = {}
+upload_folder = '/tmp/uploads'
+
+
+try:
+    os.mkdir(upload_folder)
+except:
+    pass
+
+
+def save_file(image):
+    save_image_filepath = os.path.join(upload_folder, image.filename)
+    image.save(save_image_filepath)
+    return save_image_filepath
+
+@app.route('/images')
+def get_images():
+    image_path = request.args.get('path')
+    return app.send_static_file(image_path)
 
 def get_post_data():
     return request.get_json(force=True)
@@ -28,24 +49,30 @@ def hello():
     return jsonify("success")
 
 
-@app.route("/u_item", methods=["POST"])
+@app.route("/new_item", methods=["POST"])
 def itemCreation():
-    data = get_post_data()
-    print(data)
-    print(dir(database_tools))
+    data = request.form
+    files = request.files
+
+    name = data['name']
+    description = data['description']
+    mainCategory = data['mainCategory']
+    image = files['image']
+    image_filepath = save_file(image)
+    print(image_filepath)
     database_tools.itemCreation(
-        (data["name"]),
-        data["mainCatagory"],
-        data["subCatagory"],
-        data["date"],
-        data["description"],
-        data["timeCreated"],
-        data["email"],
-        data["typeItem"],
+        name,
+        mainCategory,
+        description,
+        image_filepath,
+        global_state['email']
     )
-    print("test")
     return jsonify("success")
 
+@app.route('/get_items')
+def get_items():
+    items = database_tools.returnItems()
+    return jsonify(items)
 
 @app.route("/CHANGE WHAT HE TELLS US", methods=["POST"])
 def feedback():
@@ -59,13 +86,14 @@ def feedback():
 
 
 @app.route("/login", methods=["POST"])
-def email():
+def login_check():
     data = get_post_data()
-    if database_tools.emailPassword(data['email'], data['password']):
-        return jsonify("success")
-    else:
-        return jsonify("failure")
 
+    if database_tools.emailPassword(data['email'], data['password']):
+        global_state['email'] = data['email']
+        return jsonify("success")
+
+<<<<<<< HEAD
 #
 #
 #
@@ -74,11 +102,9 @@ def email():
 
 
 app.run(threaded=False)
+=======
+    return jsonify("failure")
+>>>>>>> b796c5bdcea75e3e46301862452a122802a084c5
 
 
-""" name: "asddasf", password: "sdofnsf", location: "asdfadsf", email: "sdfsdf", type: "Giver"}
-email: "sdfsdf"
-location: "asdfadsf"
-name: "asddasf"
-password: "sdofnsf"
-type: "Giver """
+app.run(threaded=False)

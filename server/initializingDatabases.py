@@ -7,7 +7,7 @@ with conn:
         """CREATE TABLE IF NOT EXISTS item (
         name TEXT NOT NULL,
         mainCategory TEXT NOT NULL,
-        photo BLOB NOT NULL,
+        photo TEXT NOT NULL,
         description TEXT NOT NULL,
         timeCreated TEXT NOT NULL,
         typeItem TEXT NOT NULL,
