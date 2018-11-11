@@ -9,7 +9,7 @@ DATABASE = './userDatabase.db'
 def get_conn():
     conn = getattr(g, '_database', None)
     if conn is None:
-        conn = g._database = sqlite3.connect(DATABASE)
+        conn = g._database = sqlite3.connect(DATABASE, isolation_level=None)
     return conn
 
 # It disconnects automatically
@@ -21,7 +21,7 @@ def close_connection(exception):
 
 
 def itemCreation(
-    name, mainCategory, description, photo, email
+    name, mainCategory, description, photo_filepath, email
 ):
     with get_conn():
         get_conn().execute(
@@ -29,12 +29,12 @@ def itemCreation(
             (
                 name,
                 mainCategory,
-                photo,
+                photo_filepath,
                 description,
                 datetime.datetime.isoformat(datetime.datetime.now()),
                 'GIVEN',
                 email
-            ),
+            )
         )
 
 

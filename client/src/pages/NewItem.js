@@ -20,6 +20,7 @@ function submitForm(e) {
   const formData = new FormData(e.target);
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "http://localhost:5000/new_item", true);
+  xhr.withCredentials = true
   xhr.send(formData);
 }
 
