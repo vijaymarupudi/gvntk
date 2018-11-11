@@ -26,6 +26,7 @@ class Card extends Component {
               </div>
         </div>
      <div class="content"> {description}, {mainCategory}
+     <br />
        <time datetime="2016-1-1">{timeCreated}</time>
        </div>
        <div> <footer class="card-footer">
