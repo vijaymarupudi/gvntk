@@ -5,8 +5,8 @@ conn = sqlite3.connect('./userDatabase.db')
 with conn:
     conn.execute("""CREATE TABLE IF NOT EXISTS item (
         name TEXT,
-        type TEXT,
-        subtype TEXT,
+        mainCatagory TEXT,
+        subCatagory TEXT,
         photo BLOB,
         description TEXT,
         timeCreated TEXT,
@@ -24,19 +24,19 @@ with conn:
 # typeitem is either a give or take
 # owner is the user email who posted the item
 
-name = "Burei Watch"
-type = "accesories"
-subtype = "wrists"
+itemName = "Burei Watch"
+mainCataogry = "accesories"
+subCatagory = "wrists"
 date = "today"
 typeItem = "give"
 description = "a black watch with mesh steel band"
 timeCreated = "now"
 
-def itemCreation(name,type,subtype,date,description,timeCreated,email,typeItem):
+def itemCreation(name,mainCatagory,subCatagory,date,description,timeCreated,email,typeItem):
     with conn:
-        conn.execute('INSERT INTO item (name, type, subtype, date, description,timeCreated, ownerEmail, typeItem) VALUES (?,?,?,?,?,?,?)', (name,type,subtype,date,description,timeCreated,email, typeItem))
+        conn.execute('INSERT INTO item (name, mainCatagory, subCatagory, date, description,timeCreated, ownerEmail, typeItem) VALUES (?,?,?,?,?,?,?)', (name,mainCatagory,subCatagory,date,description,timeCreated,email, typeItem))
 
-name = "n"
+userName = "n"
 password = "p"
 location = "l"
 email = "e"
@@ -45,7 +45,7 @@ id = "i"
 with conn:
 
     conn.execute("""CREATE TABLE IF NOT EXISTS user (
-        name TEXT,
+        userName TEXT,
         password TEXT,
         type TEXT,
         location TEXT,
@@ -65,8 +65,8 @@ def makeUser(name,password,type,location,email):
 
         conn.execute('INSERT INTO user (name, password, type, location, email) VALUES (?,?,?,?,?)',(name,password,type,location,email))
 
-makeUser(name,password,type,location,email)
-itemCreation(name,type,subtype,date,description,timeCreated,email)
+makeUser(userName,password,mainCataogry,location,email)
+itemCreation(userName,mainCataogry,subCatagory,date,description,timeCreated,email)
 conn.close()
 
 
@@ -76,6 +76,7 @@ def returnItems(type, typeItem):
     return listOfItems
 conn.close()
 
-returnItems(type, typeItem)
+returnItems(mainCataogry, typeItem)
+
 
 
