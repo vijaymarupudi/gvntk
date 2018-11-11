@@ -55,6 +55,13 @@ def itemTaken():
     database_tools.itemTaken(data["name"], data["typeItem"])
     return jsonify("success")
 
+@app.route("/ another thing",methods=["POST"])
+def filterItems():
+    data= get_post_data
+    print(data)
+    filters = database_tools.filterItems(data["name"],data["typeItem"])
+    return jsonify(filters)
+
 @app.route("/new_item", methods=["POST"])
 def itemCreation():
     data = request.form
