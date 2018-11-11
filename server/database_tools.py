@@ -31,6 +31,13 @@ def makeUser(userName, password, accountType, location, email):
             (userName, password, accountType, location, email),
         )
 
+def makeFeedback(feedback,timeCreated,feedBackName):
+    
+    with conn:
+        
+        conn.execute('INSERT INTO user (feedback,timeCreated,feedBackName) VALUES (?,?,?)',(feedback,timeCreated,feedBackName))
+
+
 
 def returnItems(mainCatagory, typeItem):
     with conn:
@@ -85,24 +92,16 @@ with conn:
         )"""
     )
 
-
-# name is name
-# password is password
-# type is either giver or taker
-# location is a string with the location they entered
-# email is the user email
-
-def makeUser(userName,password,accountType,location,email):
+with conn:
+    #feedback contains feed back from the user
+    #timecreated is the time of the feedback posting
+    #creates the feedback schema
     
-    with conn:
+    conn.execute(
+                 """CREATE TABLE IF NOT EXISTS feedback (
+                     feedback TEXT,
+                     timeCreated TEXT,
+                     feedBackName TEXT
+                     )"""
+                 )
 
-        conn.execute('INSERT INTO user (userName, password, accountType, location, email) VALUES (?,?,?,?,?)',(userName,password,accountType,location,email))
-
-def returnItems(mainCatagory, typeItem):
-    with conn:
-        listOfItems = conn.execute('SELECT * FROM item where (mainCatagory,typeItem) = (?,?)',(mainCatagory,typeItem))
-    return listOfItems
-
-returnItems(mainCatagory, typeItem)
-
-# returnItems(mainCataogry, typeItem)
