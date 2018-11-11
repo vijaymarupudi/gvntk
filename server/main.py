@@ -69,6 +69,10 @@ def itemCreation():
     )
     return jsonify("success")
 
+@app.route('/get_items')
+def get_items():
+    items = database_tools.returnItems()
+    return jsonify(items)
 
 @app.route("/CHANGE WHAT HE TELLS US", methods=["POST"])
 def feedback():

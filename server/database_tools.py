@@ -5,11 +5,22 @@ from app import app
 
 DATABASE = './userDatabase.db'
 
+def rows_to_dict(rows):
+    final_list = []
+    for row in rows:
+        keys = row.keys()
+        new_dict = {}
+        for key in keys:
+            new_dict[key] = row[key]
+        final_list.append(new_dict)
+    return final_list
+
 # It connects the database if it's not connected.
 def get_conn():
     conn = getattr(g, '_database', None)
     if conn is None:
         conn = g._database = sqlite3.connect(DATABASE, isolation_level=None)
+        conn.row_factory = sqlite3.Row
     return conn
 
 # It disconnects automatically
@@ -58,14 +69,11 @@ def makeFeedback(feedback, timeCreated, feedBackName):
         )
 
 
-def returnItems(mainCategory, typeItem):
+def returnItems():
     with get_conn():
-        listOfItems = get_conn().execute(
-            "SELECT * FROM item where (mainCategory,typeItem) = (?,?)",
-            (mainCategory, typeItem),
-        )
+        items = get_conn().execute('SELECT * from item').fetchall()
 
-    return listOfItems
+    return rows_to_dict(items)
 
 
 def emailPassword(email, userPassword):
