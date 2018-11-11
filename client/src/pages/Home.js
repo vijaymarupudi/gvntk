@@ -40,7 +40,9 @@ class AboutUsButton extends Component {
           marginTop: "100px"
         }}
       >
-        <button class="aboutusbutton">Our Mission</button>
+        <Centered>
+          <button class="aboutusbutton">Our Mission</button>
+        </Centered>
       </div>
     );
   }
