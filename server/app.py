@@ -1,5 +1,6 @@
-from flask import Flask, redirect, request
+from flask import Flask, redirect, request,jsonify
 import database_tools
+
 
 app = Flask(__name__)
 
@@ -24,10 +25,11 @@ def hello():
     print(dir(database_tools))
     database_tools.makeUser((data['name']),data['password'],data['type'],data['location'],data['email'])
     print ('test')
-    return (data['name'],data['password'],data['type'],data['location'],data['email'])
+    return (jsonify('success'))
 
 
-app.run()
+
+app.run(threaded = False)
 
 
 """ name: "asddasf", password: "sdofnsf", location: "asdfadsf", email: "sdfsdf", type: "Giver"}
