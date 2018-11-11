@@ -1,19 +1,19 @@
 h1 {
-  color: #1f4c45;
+  color: #322e46;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 300%;
   font-variant: small-caps;
-  text-shadow: 2px 2px #6a716f;
+  text-shadow: 2px 2px #55a195;
   text-align: center;
 }
 body {
-  background-color: #f0ddbc;
+  background-color: #f9f8d3;
   min-height: 100vh;
 }
 
 .mainbuttons {
-  background-color: #2a3060;
-  color: #f1f2f8;
+  background-color: #a0d9af;
+  color: #395c6a;
   font-size: 150%;
   font-family: Arial, Helvetica, sans-serif;
   padding: 75px 100px;
@@ -25,8 +25,8 @@ body {
 }
 
 .mainbuttons:hover {
-  background-color: #547882;
-  color: white;
+  background-color: #55a195;
+  color: #f9f8d3;
 }
 .forusbuttons {
   padding: 20px 25px;
@@ -34,14 +34,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 120%;
   border-radius: 2px;
-  color: #1f4c45;
-  background-color: #f0ddbc;
+  color: #395c6a;
+  background-color: #f9f8d3;
   cursor: pointer;
   text-align: center;
 }
 .forusbuttons:hover {
-  background-color: #547882;
-  color: white;
+  background-color: #55a195;
+  color: #f9f8d3;
 }
 .HaveLoginOrSignUp {
   font-family: Arial, Helvetica, sans-serif;
