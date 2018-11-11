@@ -19,7 +19,7 @@ function submitForm(e) {
   e.preventDefault();
   const formData = new FormData(e.target);
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", "http://localhost:5000/new_item", true);
+  xhr.open("POST", "http://127.0.0.1:5000/new_item", true);
   xhr.withCredentials = true
   xhr.send(formData);
 }
