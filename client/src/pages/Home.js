@@ -31,7 +31,7 @@ class GiveOrTakeButtons extends Component {
     );
   }
 }
-class AboutUsButton extends Component {
+class ForUsButtons extends Component {
   render() {
     return (
       <div
@@ -41,7 +41,8 @@ class AboutUsButton extends Component {
         }}
       >
         <Centered>
-          <button class="aboutusbutton">Our Mission</button>
+          <button class="forusbuttons">Our Mission</button>
+          <button class="forusbuttons">Feedback</button>
         </Centered>
       </div>
     );
@@ -75,7 +76,7 @@ class App extends Component {
         </div>
         <DisplayedImage image={MainImageFile} />
         <GiveOrTakeButtons />
-        <AboutUsButton />
+        <ForUsButtons />
       </div>
     );
   }
