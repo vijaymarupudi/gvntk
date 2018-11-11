@@ -98,4 +98,13 @@ def returnItems(mainCatagory, typeItem):
 
     return listOfItems
 
-print (conn.execute('SELECT * FROM user').fetchall())
+def emailPassword(email,password):
+    with conn:
+        userPassword = conn.execute('SELECT password FROM user WHERE email = ?', (email))
+        if userPassword == None:
+            return False
+        if userPassword == password:
+            return True
+        else:
+            return False
+
