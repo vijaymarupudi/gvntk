@@ -1,5 +1,6 @@
 import sqlite3
 from flask import g
+import datetime
 from app import app
 
 DATABASE = './userDatabase.db'
@@ -20,20 +21,19 @@ def close_connection(exception):
 
 
 def itemCreation(
-    name, mainCategory, subCategory, date, description, timeCreated, email, typeItem
+    name, mainCategory, description, photo, email
 ):
     with get_conn():
         get_conn().execute(
-            "INSERT INTO item (name, mainCategory, subCategory, date, description,timeCreated, ownerEmail, typeItem) VALUES (?,?,?,?,?,?,?)",
+            "INSERT INTO item (name, mainCategory, photo, description,timeCreated, typeItem, ownerEmail) VALUES (?, ?, ?, ?, ?, ?, ?)",
             (
                 name,
                 mainCategory,
-                subCategory,
-                date,
+                photo,
                 description,
-                timeCreated,
-                email,
-                typeItem,
+                datetime.datetime.isoformat(datetime.datetime.now()),
+                'GIVEN',
+                email
             ),
         )
 
@@ -46,7 +46,6 @@ def makeUser(userName, password, accountType, location, email):
             "INSERT INTO user (userName, password, accountType, location, email) VALUES (?,?,?,?,?)",
             (userName, password, accountType, location, email),
         )
-        get_conn().commit()
 
 
 def makeFeedback(feedback, timeCreated, feedBackName):
@@ -69,15 +68,15 @@ def returnItems(mainCategory, typeItem):
     return listOfItems
 
 
-def emailPassword(email, password):
+def emailPassword(email, userPassword):
     with get_conn():
-        userPassword = get_conn().execute(
+        databasePasswordRow = get_conn().execute(
             "SELECT password FROM user WHERE email = ?", (email,)
-        ).fetchall()
-        print(userPassword)
-        if userPassword == None:
+        ).fetchone()
+
+        try:
+            if userPassword == databasePasswordRow[0]:
+                return True
+        except:
             return False
-        if userPassword == password:
-            return True
-        else:
-            return False
+        

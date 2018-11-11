@@ -1,4 +1,4 @@
-from flask import redirect, request, jsonify
+from flask import redirect, request, jsonify, session
 from app import app
 import database_tools
 
@@ -28,22 +28,25 @@ def hello():
     return jsonify("success")
 
 
-@app.route("/u_item", methods=["POST"])
+@app.route("/new_item", methods=["POST"])
 def itemCreation():
-    data = get_post_data()
-    print(data)
-    print(dir(database_tools))
+    data = request.form
+    files = request.files
+
+    name = data['name']
+    description = data['description']
+    mainCategory = data['mainCategory']
+    image = files['image']
+    imageData = image.read()
+    print(session)
+
     database_tools.itemCreation(
-        (data["name"]),
-        data["mainCatagory"],
-        data["subCatagory"],
-        data["date"],
-        data["description"],
-        data["timeCreated"],
-        data["email"],
-        data["typeItem"],
+        name,
+        mainCategory,
+        description,
+        imageData,
+        session['email']
     )
-    print("test")
     return jsonify("success")
 
 
@@ -59,12 +62,15 @@ def feedback():
 
 
 @app.route("/login", methods=["POST"])
-def email():
+def login_check():
     data = get_post_data()
+
     if database_tools.emailPassword(data['email'], data['password']):
+        session['email'] = data['email']
+        session.modified = True
         return jsonify("success")
-    else:
-        return jsonify("failure")
+
+    return jsonify("failure")
 
 
 app.run(threaded=False)
