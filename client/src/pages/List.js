@@ -15,7 +15,9 @@ class Card extends Component {
       image_path
     } = this.props;
     return (
-      <div className="tile is-4">
+      <div className="tile is-4" style={{
+        padding: "10px"
+      }}>
         <div className="card">
           <div className="card-image">
             <figure className="image is-4by3">
@@ -99,6 +101,7 @@ class List extends Component {
               className="tile is-ancestor"
               style={{
                 flexWrap: "wrap"
+                
               }}
             >
               {this.state.data.map(item => {
