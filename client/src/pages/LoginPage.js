@@ -15,7 +15,14 @@ export default class Login extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const formData = utils.formToObject(e.target);
-    utils.postData("/login", formData);
+    utils.postData("/login", formData)
+    .then(data => {
+      if (data === 'success') {
+        this.setState({
+          redirect: true
+        })
+      }
+    });
   }
 
   render() {
