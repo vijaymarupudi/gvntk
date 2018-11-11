@@ -1,5 +1,7 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import Layout from "../components/Layout";
+import * as utils from "../utils";
 
 class Card extends Component {
   render() {
@@ -35,14 +37,28 @@ class Card extends Component {
             <div> </div>
           </div>
           <footer className="card-footer">
-            <div className="card-footer-item">
+            <a
+              onClick={e => {
+                e.preventDefault();
+                sendPostAndReload({
+                  name: name,
+                  typeItem: typeItem === 'GIVEN' ? 'TAKEN' : 'GIVEN'
+                });
+              }}
+              className="card-footer-item"
+            >
               {typeItem === "GIVEN" ? "I want this" : "Taken"}
-            </div>
+            </a>
           </footer>
         </div>
       </div>
     );
   }
+}
+function sendPostAndReload(dataToPost) {
+  utils.postData("/update_item", dataToPost).then(() => {
+    window.location.reload();
+  });
 }
 
 class List extends Component {
@@ -95,5 +111,9 @@ class List extends Component {
     );
   }
 }
+//handleSubmit(e) {
+//e.preventDefault();
+//const formData = utils.formToObject(e.target);
+//utils.postData("/login", formData)
 
 export default List;

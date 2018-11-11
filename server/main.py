@@ -49,14 +49,14 @@ def hello():
     )
     return jsonify("success")
 
-@app.route("/ something somthin", methods=["POST"])
+@app.route("/update_item", methods=["POST"])
 def itemTaken():
-    data = get_post_data
+    data = get_post_data()
     print(data)
-    database_tools.itemTaken(data["name"], data["typeItem"])
+    database_tools.takenUpdate(data["name"], data["typeItem"])
     return jsonify("success")
 
-@app.route("/ another thing",methods=["POST"])
+@app.route("/sdfsdfsdf",methods=["POST"])
 def filterItems():
     data= get_post_data
     print(data)
