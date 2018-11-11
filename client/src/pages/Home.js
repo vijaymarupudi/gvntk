@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "../style.css";
 import MainImageFile from "../images/handpic.png";
 import { Link } from "react-router-dom";
+import bicycleImage from "../images/bicycle.png";
 
 function DisplayedImage(props) {
   const { image } = props;
@@ -116,10 +117,8 @@ class ForUsButtons extends Component {
         }}
       >
         <Centered>
-          <Link className="forusbuttons" to="/about">
-            Our Mission
-          </Link>
-          <button class="forusbuttons">Feedback</button>
+          <Link className="forusbuttons" to="/about">Our Mission</Link>
+          <Link class="forusbuttons" to="/feedbackform">Feedback</Link>
         </Centered>
       </div>
     );
@@ -143,6 +142,32 @@ function Centered(props) {
     </div>
   );
 }
+class Card extends Component {
+  render() {
+    return (
+      <div class="card">
+        <div class="card-image" >
+          <figure class="image is-4by3">
+          <img src={bicycleImage} alt="Placeholder" />
+          </figure>
+        </div>
+      <div class="card-content">
+        <div class="media">
+              <div class="media-left" >
+               <p class="title is-4">John Smith</p>
+               <p class="subtitle is-6">@johnsmith</p>
+              </div>
+        </div>
+     <div class="content">
+       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+       Phasellus nec iaculis mauris.
+       <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+       </div>
+    </div>
+  </div>
+    )
+  }
+}
 
 class App extends Component {
   render() {
@@ -154,9 +179,11 @@ class App extends Component {
         <DisplayedImage image={MainImageFile} />
         <GiveOrTakeButtons />
         <ForUsButtons />
+        <Card />
       </div>
     );
   }
 }
+
 
 export default App;
