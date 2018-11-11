@@ -23,12 +23,12 @@ function DisplayedImage(props) {
 class GiveOrTakeButtons extends Component {
   render() {
     return (
-      <div>
+      <div className="section">
         <Centered>
-          <Link to="/new_user">
-            <button className="mainbuttons">I Need Something</button>
+          <Link className="mainbuttons" to="/new_user">
+            I Need Something
           </Link>
-          <button class="mainbuttons">I Have Something</button>
+          <Link to="/new_user" className="mainbuttons">I Have Something</Link>
         </Centered>
       </div>
     );

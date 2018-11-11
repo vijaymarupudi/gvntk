@@ -22,8 +22,10 @@ body {
   transition-duration: 0.4s;
   cursor: pointer;
   width: 95%;
+  text-align: center;
 }
-button:hover {
+
+.mainbuttons:hover {
   background-color: #547882;
   color: white;
 }
