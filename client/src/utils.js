@@ -3,7 +3,8 @@ export function postData(url, data) {
   method: "POST",
   body: JSON.stringify(data)
   }).then(resp => resp.json()).then(data => {
-      console.log(data)
+    console.log(data)
+      return data
   });
 }
 
