@@ -10,6 +10,7 @@ def add_header(response):
     return response
 
 
+
 @app.route("/")
 def index():
     return redirect('http://127.0.0.1:3000')
