@@ -25,13 +25,36 @@ class GiveOrTakeButtons extends Component {
     return (
       <div className="section">
         <Centered>
-          <Link className="mainbuttons" to="/new_user">
-            I Need Something
-          </Link>
-          <Link to="/new_user" className="mainbuttons">I Have Something</Link>
+          <Link className="mainbuttons" to="/new_user">I Have Something</Link>
+          <Link to="/new_user" className="mainbuttons">I Need Something</Link>
         </Centered>
       </div>
     );
+  }
+}
+class HaveLoginOrSignUp extends Component {
+  render() {
+    return (
+      <div className="HaveLoginOrSignUp">
+        <Centered>
+          <Link to="/new_user">Sign Up</Link>
+          <Link to="/login">Login</Link>
+        </Centered>
+      </div>
+    )
+  }
+}
+class TakeLoginOrSignUp extends Component {
+  render() {
+    return (
+      <div className="TakeLoginorSignUp">
+      <Centered>
+        <Link to="/new_user">Sign Up</Link>
+        <Link to="/login">Login</Link>
+        <Link to="/list">List of Items</Link>
+      </Centered>
+      </div>
+    )
   }
 }
 class ForUsButtons extends Component {
@@ -44,7 +67,7 @@ class ForUsButtons extends Component {
         }}
       >
         <Centered>
-          <button class="forusbuttons">Our Mission</button>
+          <Link className="forusbuttons" to="/about">Our Mission</Link>
           <button class="forusbuttons">Feedback</button>
         </Centered>
       </div>
@@ -79,6 +102,8 @@ class App extends Component {
         </div>
         <DisplayedImage image={MainImageFile} />
         <GiveOrTakeButtons />
+        <HaveLoginOrSignUp />
+        <TakeLoginOrSignUp />
         <ForUsButtons />
       </div>
     );
