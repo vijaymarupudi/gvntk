@@ -20,7 +20,12 @@ function handleSubmit(e) {
   for (const [key, value] of data.entries()) {
     formEntries[key] = value
   }
-  axios.post('http://127.0.0.1:5000/new_user', formEntries)
+
+  fetch('http://127.0.0.1:5000/new_user', {
+    method: 'POST',
+    body: JSON.stringify(formEntries)
+  })
+  // axios.post('http://127.0.0.1:5000/new_user', formEntries)
 }
 
 function NewAccount() {
