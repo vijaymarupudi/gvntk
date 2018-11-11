@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../style.css";
 import MainImageFile from "../images/handpic.png";
+import { Link } from "react-router-dom";
 
 function DisplayedImage(props) {
   const { image } = props;
@@ -24,7 +25,9 @@ class GiveOrTakeButtons extends Component {
     return (
       <div>
         <Centered>
-          <button class="mainbuttons">I Need Something</button>
+          <Link to="/new_user">
+            <button className="mainbuttons">I Need Something</button>
+          </Link>
           <button class="mainbuttons">I Have Something</button>
         </Centered>
       </div>
