@@ -92,8 +92,8 @@ def takenUpdate(name, typeItem):
     with get_conn():
         get_conn().execute('UPDATE item SET typeItem = ? WHERE name=(?)',(typeItem, name,))
 
-def filterItems (name, typeItem)
+def filterItems (name, typeItem):
     with get_conn():
-        filters = get_conn.execute('SELECT * FROM item from item WHERE (name,typeItem)=(?,?)',(name,typeItem,))
+        filters = get_conn().execute('SELECT * FROM item from item WHERE (name,typeItem)=(?,?)',(name,typeItem,))
     return filters
 

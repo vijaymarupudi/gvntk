@@ -1,5 +1,6 @@
-from flask import redirect, request, jsonify, session
+from flask import redirect, request, jsonify, session, send_file
 import os
+import base64
 from app import app
 import database_tools
 
@@ -21,8 +22,8 @@ def save_file(image):
 
 @app.route('/images')
 def get_images():
-    image_path = request.args.get('path')
-    return app.send_static_file(image_path)
+    image_path = base64.b64decode(request.args.get('path')).decode()
+    return send_file(image_path)
 
 def get_post_data():
     return request.get_json(force=True)
