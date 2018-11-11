@@ -106,7 +106,6 @@ def login_check():
         global_state['email'] = data['email']
         return jsonify("success")
 
-
     return jsonify("failure")
 
 
