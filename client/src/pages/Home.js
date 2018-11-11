@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../style.css";
 import MainImageFile from "../images/handpic.png";
+import { Link } from "react-router-dom";
 
 function DisplayedImage(props) {
   const { image } = props;
@@ -22,16 +23,18 @@ function DisplayedImage(props) {
 class GiveOrTakeButtons extends Component {
   render() {
     return (
-      <div>
+      <div className="section">
         <Centered>
-          <button class="mainbuttons">I Need Something</button>
-          <button class="mainbuttons">I Have Something</button>
+          <Link className="mainbuttons" to="/new_user">
+            I Need Something
+          </Link>
+          <Link to="/new_user" className="mainbuttons">I Have Something</Link>
         </Centered>
       </div>
     );
   }
 }
-class AboutUsButton extends Component {
+class ForUsButtons extends Component {
   render() {
     return (
       <div
@@ -41,7 +44,8 @@ class AboutUsButton extends Component {
         }}
       >
         <Centered>
-          <button class="aboutusbutton">Our Mission</button>
+          <button class="forusbuttons">Our Mission</button>
+          <button class="forusbuttons">Feedback</button>
         </Centered>
       </div>
     );
@@ -75,7 +79,7 @@ class App extends Component {
         </div>
         <DisplayedImage image={MainImageFile} />
         <GiveOrTakeButtons />
-        <AboutUsButton />
+        <ForUsButtons />
       </div>
     );
   }
