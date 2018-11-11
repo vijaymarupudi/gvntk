@@ -27,6 +27,25 @@ def hello():
     print ('test')
     return (jsonify('success'))
 
+@app.route('/CHANGE WHAT HE TELLS US', methods=["POST"])
+def itemCreation():
+    data = get_post_data()
+    print (data)
+    print(dir(database_tools))
+    database_tools.itemCreation((data['name']),data['mainCatagory'],data['subCatagory'],data['date'],
+                                 data['description'],data['timeCreated'],data['email'],data['typeItem'])
+    print ('test')
+    return (jsonify('success'))
+
+@app.route('/CHANGE WHAT HE TELLS US', methods=["POST"])
+def feedback():
+    data = get_post_data()
+    print (data)
+    print(dir(database_tools))
+    database_tools.makeFeedback((data['feedback']),data['timeCreated'],data['feedBackName'])
+    print ('test')
+    return (jsonify('success'))
+
 
 
 app.run(threaded = False)
