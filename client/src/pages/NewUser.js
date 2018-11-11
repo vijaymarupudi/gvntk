@@ -14,6 +14,34 @@ function TextField(props) {
   );
 }
 
+function DropdownField(props) {
+  const { name, options, label } = props;
+  return (
+    <div className="field">
+      <label className="label" htmlFor={name}>{label}</label>
+      <div className="control">
+        <div className="select">
+          <select name={name}>
+            {options.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Submit(props) {
+  return (
+    <div className="field">
+      <div className="control">
+        <button className="button is-primary">Submit</button>
+      </div>
+    </div>
+  );
+}
+
 function handleSubmit(e) {
   e.preventDefault();
   const $form = e.target;
@@ -29,6 +57,7 @@ function handleSubmit(e) {
     method: "POST",
     body: JSON.stringify(formEntries)
   });
+
   // axios.post('http://127.0.0.1:5000/new_user', formEntries)
 }
 
@@ -40,8 +69,8 @@ function NewAccount() {
         <TextField name="password" label="Password" type="password" />
         <TextField name="location" label="Location" />
         <TextField name="email" label="Email" />
-        <TextField name="type" label="Type" />
-        <button className="button">Submit</button>
+        <DropdownField name="type" options={["Giver", "Taker"]} label="Type" />
+        <Submit />
       </form>
     </div>
   );
