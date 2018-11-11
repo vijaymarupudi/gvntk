@@ -48,11 +48,11 @@ def feedback():
 @app.route('/login', methods=["POST"])
 def email():
     data = get_post_data()
-    if database_tools.emailPassword(email,password) == data['email'] and database_tools.password() == data['password']:
+    if database_tools.emailPassword(email,password) == data['email'],data['password']:
         return (jsonify('success'))
     else:
         return (jsonify('failure'))
-    return (jsonify('success'))
+    
 
 app.run(threaded = False)
 
