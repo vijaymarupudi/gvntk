@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.5.0",
     "axios": "^0.18.0",
     "bulma": "^0.7.2",
+    "install": "^0.12.2",
     "node-sass": "^4.10.0",
+    "npm": "^6.4.1",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-router-dom": "^4.3.1",
