@@ -2,6 +2,7 @@ import React from "react";
 
 import * as forms from "../components/forms";
 import * as utils from "../utils";
+import {Redirect} from "react-router-dom"
 
 import Layout from "../components/Layout";
 
@@ -9,6 +10,7 @@ function handleSubmit(e) {
   e.preventDefault();
   const formData = utils.formToObject(e.target);
   utils.postData("/login", formData);
+  //<Redirect to="/new_item" />
 }
 
 export default function Login() {
