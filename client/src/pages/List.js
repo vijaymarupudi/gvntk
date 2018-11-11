@@ -15,9 +15,12 @@ class Card extends Component {
       image_path
     } = this.props;
     return (
-      <div className="tile is-4" style={{
-        padding: "10px"
-      }}>
+      <div
+        className="tile is-4"
+        style={{
+          padding: "10px"
+        }}
+      >
         <div className="card">
           <div className="card-image">
             <figure className="image is-4by3">
@@ -42,9 +45,9 @@ class Card extends Component {
             <a
               onClick={e => {
                 e.preventDefault();
-                sendPostAndReload({
+                this.props.sendPostAndReload({
                   name: name,
-                  typeItem: typeItem === 'GIVEN' ? 'TAKEN' : 'GIVEN'
+                  typeItem: typeItem === "GIVEN" ? "TAKEN" : "GIVEN"
                 });
               }}
               className="card-footer-item"
@@ -57,11 +60,6 @@ class Card extends Component {
     );
   }
 }
-function sendPostAndReload(dataToPost) {
-  utils.postData("/update_item", dataToPost).then(() => {
-    window.location.reload();
-  });
-}
 
 class List extends Component {
   constructor(props) {
@@ -72,20 +70,23 @@ class List extends Component {
     fetch("http://127.0.0.1:5000/get_items")
       .then(resp => resp.json())
       .then(data => {
-        const newData = [];
-        for (const dataItem of data) {
-          const newDataItem = {};
-          for (const [key, value] of Object.entries(dataItem)) {
-            newDataItem[key] = value;
-          }
-          newDataItem["image_path"] = encodeURI(
-            `http://127.0.0.1:5000/images?path=${btoa(dataItem.photo)}`
-          );
-          newData.push(newDataItem);
-        }
+        const newData = dataProcessor(data);
 
-        console.log(newData);
+        this.setState({
+          data: newData
+        });
+      });
+  }
 
+  sendPostAndReload(dataToPost) {
+    utils
+      .postData("/update_item", dataToPost)
+      .then(() => {
+        return fetch("http://127.0.0.1:5000/get_items");
+      })
+      .then(resp => resp.json())
+      .then(data => {
+        const newData = dataProcessor(data);
         this.setState({
           data: newData
         });
@@ -101,11 +102,16 @@ class List extends Component {
               className="tile is-ancestor"
               style={{
                 flexWrap: "wrap"
-                
               }}
             >
               {this.state.data.map(item => {
-                return <Card key={item.name} {...item} />;
+                return (
+                  <Card
+                    sendPostAndReload={this.sendPostAndReload.bind(this)}
+                    key={item.name}
+                    {...item}
+                  />
+                );
               })}
             </div>
           )}
@@ -113,6 +119,21 @@ class List extends Component {
       </Layout>
     );
   }
+}
+
+function dataProcessor(data) {
+  const newData = [];
+  for (const dataItem of data) {
+    const newDataItem = {};
+    for (const [key, value] of Object.entries(dataItem)) {
+      newDataItem[key] = value;
+    }
+    newDataItem["image_path"] = encodeURI(
+      `http://127.0.0.1:5000/images?path=${btoa(dataItem.photo)}`
+    );
+    newData.push(newDataItem);
+  }
+  return newData;
 }
 //handleSubmit(e) {
 //e.preventDefault();
