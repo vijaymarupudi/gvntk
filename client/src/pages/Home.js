@@ -68,8 +68,39 @@ class GiveOrTakeButtons extends Component {
     return (
       <div className="section">
         <Centered>
-          <ModalMainButton text="I Want Something" modalContent={<p>Test</p>} />
-          <ModalMainButton text="I Need Something" modalContent={<p>Test</p>} />
+          <ModalMainButton
+            text="I Have Something"
+            modalContent={<HaveLoginOrSignUp />}
+          />
+          <ModalMainButton
+            text="I Need Something"
+            modalContent={<TakeLoginOrSignUp />}
+          />
+        </Centered>
+      </div>
+    );
+  }
+}
+class HaveLoginOrSignUp extends Component {
+  render() {
+    return (
+      <div className="HaveLoginOrSignUp">
+        <Centered>
+          <Link to="/new_user">Sign Up</Link>
+          <Link to="/login">Login</Link>
+        </Centered>
+      </div>
+    );
+  }
+}
+class TakeLoginOrSignUp extends Component {
+  render() {
+    return (
+      <div className="TakeLoginorSignUp">
+        <Centered>
+          <Link to="/new_user">Sign Up</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/list">List of Items</Link>
         </Centered>
       </div>
     );
@@ -85,8 +116,10 @@ class ForUsButtons extends Component {
         }}
       >
         <Centered>
-          <button className="forusbuttons">Our Mission</button>
-          <button className="forusbuttons">Feedback</button>
+          <Link className="forusbuttons" to="/about">
+            Our Mission
+          </Link>
+          <button class="forusbuttons">Feedback</button>
         </Centered>
       </div>
     );

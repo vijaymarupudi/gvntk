@@ -22,9 +22,9 @@ def hello():
     data = get_post_data()
     print (data)
     print(dir(database_tools))
-    database_tools.makeUser((data['name']),data['password'],data['accountType'],data['location'],data['email'])
+    database_tools.makeUser((data['name']),data['password'],data['type'],data['location'],data['email'])
     print ('test')
-    return (data['name'],data['password'],data['accountType'],data['location'],data['email'])
+    return (data['name'],data['password'],data['type'],data['location'],data['email'])
 
 
 app.run()
