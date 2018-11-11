@@ -32,10 +32,10 @@ def makeUser(userName, password, accountType, location, email):
         )
 
 
-def returnItems(type, typeItem):
+def returnItems(mainCatagory, typeItem):
     with conn:
         listOfItems = conn.execute(
-            "SELECT * FROM item where (type,typeItem) = (?,?)", (type, typeItem)
+            "SELECT * FROM item where (mainCatagory,typeItem) = (?,?)", (mainCatagory, typeItem)
         )
 
     return listOfItems
@@ -66,7 +66,7 @@ with conn:
 # owner is the user email who posted the item
 
 itemName = "Burei Watch"
-mainCataogry = "accesories"
+mainCatagory = "accesories"
 subCatagory = "wrists"
 date = "today"
 typeItem = "give"
@@ -98,11 +98,11 @@ def makeUser(userName,password,accountType,location,email):
 
         conn.execute('INSERT INTO user (userName, password, accountType, location, email) VALUES (?,?,?,?,?)',(userName,password,accountType,location,email))
 
-def returnItems(type, typeItem):
+def returnItems(mainCatagory, typeItem):
     with conn:
-        listOfItems = conn.execute('SELECT * FROM item where (type,typeItem) = (?,?)',(type,typeItem))
+        listOfItems = conn.execute('SELECT * FROM item where (mainCatagory,typeItem) = (?,?)',(mainCatagory,typeItem))
     return listOfItems
 
-returnItems(mainCataogry, typeItem)
+returnItems(mainCatagory, typeItem)
 
 # returnItems(mainCataogry, typeItem)
