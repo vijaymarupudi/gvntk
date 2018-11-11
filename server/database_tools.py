@@ -100,7 +100,6 @@ def returnItems(mainCatagory, typeItem):
 
 def emailPassword(email,password):
     with conn:
-        password,email = conn.execute('SELECT password,email FROM user where email,password = ?,?', (email,password))
+        password = conn.execute('SELECT email FROM user where password = ?', (email))
+        email = conn.execute('SELECT password FROM user where password = ?', (password))
         return password,email
-
-print (conn.execute('SELECT * FROM user').fetchall())
