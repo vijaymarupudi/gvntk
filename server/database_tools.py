@@ -1,5 +1,4 @@
 import sqlite3
-import app.py
 
 conn = sqlite3.connect('./userDatabase.db')
 
@@ -63,14 +62,12 @@ def makeUser(userName,password,accountType,location,email):
 
         conn.execute('INSERT INTO user (userName, password, accountType, location, email) VALUES (?,?,?,?,?)',(userName,password,accountType,location,email))
 
-conn.close()
-
+makeUser(app.hello())
 
 def returnItems(type, typeItem):
     with conn:
         listOfItems = conn.execute('SELECT * FROM item where (type,typeItem) = (?,?)',(type,typeItem))
     return listOfItems
-conn.close()
 
 returnItems(mainCataogry, typeItem)
 
