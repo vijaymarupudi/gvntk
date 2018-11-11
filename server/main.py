@@ -110,4 +110,4 @@ def login_check():
     return jsonify("failure")
 
 
-app.run(threaded=False)
+app.run()
