@@ -65,8 +65,8 @@ def makeUser(name,password,type,location,email):
 
         conn.execute('INSERT INTO user (name, password, type, location, email) VALUES (?,?,?,?,?)',(name,password,type,location,email))
 
-makeUser(userName,password,mainCataogry,location,email)
-itemCreation(userName,mainCataogry,subCatagory,date,description,timeCreated,email)
+makeUser(userName,password,type,location,email)
+itemCreation(userName,mainCataogry,subCatagory,date,description,timeCreated,email,typeItem)
 conn.close()
 
 

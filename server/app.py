@@ -1,5 +1,5 @@
 from flask import Flask, redirect, request
-import databaseTools
+import database_tools
 
 app = Flask(__name__)
 
@@ -19,8 +19,18 @@ def index():
 
 @app.route('/new_user', methods=["POST"])
 def hello():
+    makeUser(data[name],data[password],data[type],data[location],data[email])
     data = get_post_data()
     print('name', data['email'])
     return 'sdfsd'
 
+
 app.run()
+
+
+""" name: "asddasf", password: "sdofnsf", location: "asdfadsf", email: "sdfsdf", type: "Giver"}
+email: "sdfsdf"
+location: "asdfadsf"
+name: "asddasf"
+password: "sdofnsf"
+type: "Giver """
