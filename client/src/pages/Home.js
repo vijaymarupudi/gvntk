@@ -1,5 +1,23 @@
 import React, { Component } from "react";
 import "../style.css";
+import MainImageFile from "../images/handpic.png";
+
+function DisplayedImage(props) {
+  const { image } = props;
+  console.log(image);
+  return (
+    <div
+      className="hero is-large"
+      style={{
+        backgroundImage: `url('${image}')`,
+        backgroundPosition: "center center",
+        backgroundSize: "cover"
+      }}
+    >
+      <div className="hero-body" />
+    </div>
+  );
+}
 
 class GiveOrTakeButtons extends Component {
   render() {
@@ -49,8 +67,11 @@ function Centered(props) {
 class App extends Component {
   render() {
     return (
-      <div className="App section container">
-        <h1 class="title is-1">giveNtake</h1>
+      <div>
+        <div className="section">
+          <h1 class="title is-1">giveNtake</h1>
+        </div>
+        <DisplayedImage image={MainImageFile} />
         <GiveOrTakeButtons />
         <AboutUsButton />
       </div>
