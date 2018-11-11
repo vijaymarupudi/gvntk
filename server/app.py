@@ -27,7 +27,7 @@ def hello():
     print ('test')
     return (jsonify('success'))
 
-@app.route('/CHANGE WHAT HE TELLS US', methods=["POST"])
+@app.route('/u_item', methods=["POST"])
 def itemCreation():
     data = get_post_data()
     print (data)
@@ -43,9 +43,15 @@ def feedback():
     print (data)
     print(dir(database_tools))
     database_tools.makeFeedback((data['feedback']),data['timeCreated'],data['feedBackName'])
-    print ('test')
     return (jsonify('success'))
 
+@app.route('/login', methods=["POST"])
+def email():
+    data = get_post_data()
+    if database_tools.emailPassword(email,password) == True:
+        return (jsonify('success'))
+    else:
+        return (jsonify('failure'))
 
 
 app.run(threaded = False)
