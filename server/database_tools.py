@@ -1,9 +1,49 @@
 import sqlite3
 
-conn = sqlite3.connect('./userDatabase.db')
+conn = sqlite3.connect("./userDatabase.db")
+
+
+def itemCreation(
+    name, mainCatagory, subCatagory, date, description, timeCreated, email, typeItem
+):
+    with conn:
+        conn.execute(
+            "INSERT INTO item (name, mainCatagory, subCatagory, date, description,timeCreated, ownerEmail, typeItem) VALUES (?,?,?,?,?,?,?)",
+            (
+                name,
+                mainCatagory,
+                subCatagory,
+                date,
+                description,
+                timeCreated,
+                email,
+                typeItem,
+            ),
+        )
+
+
+def makeUser(userName, password, accountType, location, email):
+
+    with conn:
+
+        conn.execute(
+            "INSERT INTO user (userName, password, accountType, location, email) VALUES (?,?,?,?,?)",
+            (userName, password, accountType, location, email),
+        )
+
+
+def returnItems(type, typeItem):
+    with conn:
+        listOfItems = conn.execute(
+            "SELECT * FROM item where (type,typeItem) = (?,?)", (type, typeItem)
+        )
+
+    return listOfItems
+
 
 with conn:
-    conn.execute("""CREATE TABLE IF NOT EXISTS item (
+    conn.execute(
+        """CREATE TABLE IF NOT EXISTS item (
         name TEXT,
         mainCatagory TEXT,
         subCatagory TEXT,
@@ -13,7 +53,8 @@ with conn:
         typeItem TEXT,
         ownerEmail TEXT,
         id INT
-    )""")
+    )"""
+    )
 
 # name item name
 # type of item i.e clothes
@@ -32,22 +73,17 @@ typeItem = "give"
 description = "a black watch with mesh steel band"
 timeCreated = "now"
 
-def itemCreation(name,mainCatagory,subCatagory,date,description,timeCreated,email,typeItem):
-    with conn:
-        conn.execute('INSERT INTO item (name, mainCatagory, subCatagory, date, description,timeCreated, ownerEmail, typeItem) VALUES (?,?,?,?,?,?,?)', (name,mainCatagory,subCatagory,date,description,timeCreated,email, typeItem))
-
-
-
 with conn:
 
-    conn.execute("""CREATE TABLE IF NOT EXISTS user (
+    conn.execute(
+        """CREATE TABLE IF NOT EXISTS user (
         userName TEXT,
         password TEXT,
         accountType TEXT,
         location TEXT,
         email TEXT
-        )""")
-
+        )"""
+    )
 
 
 # name is name
@@ -62,8 +98,6 @@ def makeUser(userName,password,accountType,location,email):
 
         conn.execute('INSERT INTO user (userName, password, accountType, location, email) VALUES (?,?,?,?,?)',(userName,password,accountType,location,email))
 
-makeUser(app.hello())
-
 def returnItems(type, typeItem):
     with conn:
         listOfItems = conn.execute('SELECT * FROM item where (type,typeItem) = (?,?)',(type,typeItem))
@@ -71,5 +105,4 @@ def returnItems(type, typeItem):
 
 returnItems(mainCataogry, typeItem)
 
-
-
+# returnItems(mainCataogry, typeItem)
