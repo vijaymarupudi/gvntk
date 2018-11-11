@@ -116,8 +116,12 @@ class ForUsButtons extends Component {
         }}
       >
         <Centered>
-          <Link className="forusbuttons" to="/about">Our Mission</Link>
-          <Link class="forusbuttons" to="/feedbackform">Feedback</Link>
+          <Link className="forusbuttons" to="/about">
+            Our Mission
+          </Link>
+          <Link className="forusbuttons" to="/feedbackform">
+            Feedback
+          </Link>
         </Centered>
       </div>
     );
@@ -128,8 +132,10 @@ function Centered(props) {
   if (Array.isArray(props.children)) {
     return (
       <div className="level">
-        {props.children.map(item => (
-          <div className="level-item">{item}</div>
+        {props.children.map((item, idx) => (
+          <div key={idx} className="level-item">
+            {item}
+          </div>
         ))}
       </div>
     );
@@ -141,7 +147,6 @@ function Centered(props) {
     </div>
   );
 }
-
 
 class App extends Component {
   render() {
@@ -157,6 +162,5 @@ class App extends Component {
     );
   }
 }
-
 
 export default App;
