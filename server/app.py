@@ -8,7 +8,7 @@ def add_header(response):
     return response
 
 
-@app.route("/")
+@app.route("/new_user")
 def hello():
     return "Hello World!"
 app.run()
