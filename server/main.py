@@ -48,6 +48,12 @@ def hello():
     )
     return jsonify("success")
 
+@app.route("/ something somthin", methods=["POST"])
+def itemTaken():
+    data = get_post_data
+    print(data)
+    database_tools.itemTaken(data["name"], data["typeItem"])
+    return jsonify("success")
 
 @app.route("/new_item", methods=["POST"])
 def itemCreation():
@@ -93,18 +99,8 @@ def login_check():
         global_state['email'] = data['email']
         return jsonify("success")
 
-<<<<<<< HEAD
-#
-#
-#
-#
-#
 
-
-app.run(threaded=False)
-=======
     return jsonify("failure")
->>>>>>> b796c5bdcea75e3e46301862452a122802a084c5
 
 
 app.run(threaded=False)
