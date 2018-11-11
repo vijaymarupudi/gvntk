@@ -32,13 +32,12 @@ typeItem = "give"
 description = "a black watch with mesh steel band"
 timeCreated = "now"
 
-def itemCreation(name,type,subtype,date,description,timeCreated,email):
+def itemCreation(name,type,subtype,date,description,timeCreated,email,typeItem):
     with conn:
-        conn.execute('INSERT INTO item (name, type, subtype, date, description,timeCreated, ownerEmail) VALUES (?,?,?,?,?,?,?)', (name,type,subtype,date,description,timeCreated,email))
+        conn.execute('INSERT INTO item (name, type, subtype, date, description,timeCreated, ownerEmail, typeItem) VALUES (?,?,?,?,?,?,?)', (name,type,subtype,date,description,timeCreated,email, typeItem))
 
 name = "n"
 password = "p"
-type = "t"
 location = "l"
 email = "e"
 id = "i"
