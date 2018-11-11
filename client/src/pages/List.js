@@ -67,7 +67,7 @@ class List extends Component {
     this.state = {
       data: null
     };
-    fetch("http://localhost:5000/get_items")
+    fetch("http://127.0.0.1:5000/get_items")
       .then(resp => resp.json())
       .then(data => {
         const newData = [];
@@ -77,7 +77,7 @@ class List extends Component {
             newDataItem[key] = value;
           }
           newDataItem["image_path"] = encodeURI(
-            `http://localhost:5000/images?path=${btoa(dataItem.photo)}`
+            `http://127.0.0.1:5000/images?path=${btoa(dataItem.photo)}`
           );
           newData.push(newDataItem);
         }
